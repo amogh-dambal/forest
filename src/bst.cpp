@@ -166,21 +166,21 @@ int bst::height_help(bnode* n)
 // not to be included in usage
 void bst::print()
 {
-    print_util(this->root, 0);
+    print_help(this->root, 0);
 }
 
-void bst::print_util(bst::bnode *node, int space)
+void bst::print_help(bst::bnode *node, int space)
 {
     if (node)
     {
         space += SPACE;
-        print_util(node->right, space);
+        print_help(node->right, space);
 
         std::cout << std::endl;
         for (int i = SPACE; i < space; i++)
             std::cout << " ";
         std::cout << node->data << std::endl;
 
-        print_util(node->left, space);
+        print_help(node->left, space);
     }
 }
