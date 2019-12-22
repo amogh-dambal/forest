@@ -58,8 +58,6 @@ private:
     static int max(bnode* n);
     static int min(bnode* n);
 
-
-
     static const int SPACE = 10;
 };
 

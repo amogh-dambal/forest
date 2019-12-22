@@ -14,8 +14,10 @@ int main(int argc, char** argv)
     tree->add(6);
     tree->add(-1);
 
-    std::cout << tree->is_present(4) << " "
-    << tree->is_present(2) << std::endl;
+    // testing remove
+    std::cout << tree->remove(2) << std::endl;
+    std::cout << tree->remove(-4) << std::endl;
 
+    tree->print();
     delete tree;
 }

@@ -11,6 +11,10 @@ vector
 -
 iostream
 -
+exception
+-
+random
+-
 
 /Users/amogh/dev/cpp/forest/src/bst.cpp
 ../include/bst.h
