@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/amogh/dev/cpp/forest/include/bst.h
+vector
+-
+
+/Users/amogh/dev/cpp/forest/src/main.cpp
+iostream
+-
+../include/bst.h
+/Users/amogh/dev/cpp/forest/include/bst.h
+
