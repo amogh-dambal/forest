@@ -2,22 +2,31 @@
 // Created by Amogh on 12/13/19.
 //
 
-#include <iostream>
 #include "../include/bst.h"
+
+#include <random>
+#include <chrono>
+
+using namespace std;
 
 int main(int argc, char** argv)
 {
-    bst* tree = new bst();
-    std::cout << "Hello, world!" << std::endl;
+    bst tree;
+    const int N = 10000;
 
-    tree->add(2);
-    tree->add(6);
-    tree->add(-1);
+    // add 100 random numbers to tree
+    random_device rd;
+    mt19937 eng(rd());
+    uniform_int_distribution<> uid(0, 1000);
 
-    // testing remove
-    std::cout << tree->remove(2) << std::endl;
-    std::cout << tree->remove(-4) << std::endl;
+    auto start = chrono::high_resolution_clock::now();
+    for (int i = 0; i < N; i++)
+    {
+        int k = uid(eng);
+        tree.add(k);
+    }
+    auto end = chrono::high_resolution_clock::now();
 
-    tree->print();
-    delete tree;
+    chrono::duration<double, milli> time = (end - start);
+    cout << "time for " << N << " add operations (naive algorithm): " << time.count() << endl;
 }
