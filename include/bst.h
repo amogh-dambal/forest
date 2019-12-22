@@ -7,6 +7,8 @@
 
 #include <vector>
 #include <iostream>
+#include <exception>
+#include <random>
 
 class bst
 {
@@ -19,7 +21,7 @@ public:
     bool is_present(int i);
     size_t size();
     int height();
-    std::vector<int> nodes();
+    // std::vector<int> nodes();
     int max();
     int min();
     void print();
@@ -48,11 +50,13 @@ private:
     bnode* root;
     size_t sz;
 
-    bnode* addhelp(bnode* node, int val);
+    bnode* add_help(bnode* node, int val);
     bnode* remove_help(bnode* n, int val);
     static bool is_present_help(bnode* node, int i);
-    static void printutil(bnode* node, int space);
+    static void print_util(bnode* node, int space);
     static int height_help(bnode* n);
+    static int max(bnode* n);
+    static int min(bnode* n);
 
 
 

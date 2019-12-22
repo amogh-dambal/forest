@@ -18,12 +18,12 @@ bst::~bst()
 
 bool bst::add(int i)
 {
-    size_t oldsize = this->sz;
-    root = addhelp(root, i);
-    return oldsize != this->sz;
+    size_t oldsz = this->sz;
+    root = add_help(root, i);
+    return oldsz != this->sz;
 }
 
-bst::bnode* bst::addhelp(bst::bnode *node, int val)
+bst::bnode* bst::add_help(bst::bnode *node, int val)
 {
     if (!node)
     {
@@ -33,11 +33,11 @@ bst::bnode* bst::addhelp(bst::bnode *node, int val)
 
     if (node->data > val)
     {
-        node->left = addhelp(node->left, val);
+        node->left = add_help(node->left, val);
     }
     else if (node->data < val)
     {
-        node->right = addhelp(node->right, val);
+        node->right = add_help(node->right, val);
     }
     return node;
 }
@@ -64,7 +64,19 @@ bst::bnode* bst::remove_help(bst::bnode* n, int val)
             else if (n->right == nullptr)                   n = n->left;
             else
             {
-                
+                std::random_device rd;
+                std::mt19937 eng(rd());
+                std::uniform_int_distribution<> uid(0, 1);
+
+                int choice = uid(eng);
+                int r = choice == 0 ? max(n->left) : min(n->right);
+
+                n->data = r;
+                if (choice == 0)    n->left = remove_help(n->left, r);
+                else                n->right = remove_help(n->right, r);
+
+                // offset size increment made by remove_help calls
+                this->sz++;
             }
         }
     }
@@ -95,20 +107,29 @@ int bst::max()
 {
     if (this->root == nullptr) throw std::invalid_argument("cannot call max() on empty tree");
 
-    bnode* ptr = this->root;
-    while (ptr->right != nullptr) ptr = ptr->right;
-
-    return ptr->data;
+    return max(this->root);
 }
 
 int bst::min()
 {
     if (this->root == nullptr) throw std::invalid_argument("cannot call min() on an empty tree");
 
-    bnode* ptr = this->root;
-    while (ptr->left != nullptr) ptr = ptr->left;
+    return min(this->root);
+}
 
-    return ptr->data;
+int bst::max(bst::bnode* n)
+{
+    bnode* ptr = n;
+    while (n->right != nullptr) n = n->right;
+    return n->data;
+
+}
+
+int bst::min(bst::bnode* n)
+{
+    bnode* ptr = n;
+    while (n->left != nullptr) n = n->left;
+    return n->data;
 }
 
 int bst::height()
@@ -131,21 +152,21 @@ int bst::height_help(bnode* n)
 // not to be included in usage
 void bst::print()
 {
-    printutil(this->root, 0);
+    print_util(this->root, 0);
 }
 
-void bst::printutil(bst::bnode *node, int space)
+void bst::print_util(bst::bnode *node, int space)
 {
     if (node)
     {
         space += SPACE;
-        printutil(node->right, space);
+        print_util(node->right, space);
 
         std::cout << std::endl;
         for (int i = SPACE; i < space; i++)
             std::cout << " ";
         std::cout << node->data << std::endl;
 
-        printutil(node->left, space);
+        print_util(node->left, space);
     }
 }
