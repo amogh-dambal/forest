@@ -66,15 +66,15 @@ bst::bnode* bst::remove_help(bst::bnode* n, int val)
             }
             else if (n->left == nullptr)
             {
-                bnode* t = n->right;
+                bnode* ptr = n->right;
                 delete n;
-                return t;
+                return ptr;
             }
             else if (n->right == nullptr)
             {
-                bnode* t = n->left;
+                bnode* ptr = n->left;
                 delete n;
-                return t;
+                return ptr;
             }
             else
             {
