@@ -29,4 +29,11 @@ int main(int argc, char** argv)
 
     chrono::duration<double, milli> time = (end - start);
     cout << "time for " << N << " add operations (naive algorithm): " << time.count() << endl;
+
+    cout << "max of tree: " << tree.max() << endl;
+    cout << "min of tree: " << tree.min() << endl;
+    cout << "height of tree: " << tree.height() << endl;
+    cout << "size of tree: " << tree.size() << endl;
+
+    tree.print();
 }
